@@ -55,10 +55,10 @@ public class PostsService {
     }
 
     /** Views Counting **/
-//    @Transactional
-//    public int updateView(Long id) {
-//        return postsRepository.updateView(id);
-//    }
+    @Transactional
+    public int updateView(Long id) {
+        return postsRepository.updateView(id);
+    }
 
     /** Paging and Sort **/
     @Transactional(readOnly = true)

@@ -1,17 +1,20 @@
 package com.boardsideproject.springbootside.controller;
 
+import com.boardsideproject.springbootside.domain.Posts;
 import com.boardsideproject.springbootside.dto.PostsDto;
 import com.boardsideproject.springbootside.repository.PostsRepository;
 import com.boardsideproject.springbootside.service.PostsService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RequestMapping("/api")
 @RequiredArgsConstructor
 @RestController
-public class PostsController {
+public class PostsApiController {
 
     private final PostsService postsService;
     private final PostsRepository postsRepository;
@@ -22,8 +25,12 @@ public class PostsController {
 //    }
 
     @GetMapping("/posts/{id}")
-    public ResponseEntity read(@PathVariable Long id) {
-        return ResponseEntity.ok(postsRepository.findById(id));
+    public String read(@PathVariable Long id, Model model) {
+        Optional<Posts> dto = postsRepository.findById(id);
+        postsService.updateView(id);
+        model.addAttribute("posts", dto);
+
+        return "posts-read";
     }
 
     @PutMapping("/posts/{id}")

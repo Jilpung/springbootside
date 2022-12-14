@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>게시판 리스트</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/board.css}">
+</head>
+<body>
+<!-- HEADER -->
+<div th:insert="common/header.html" id="header"></div>
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">제목</th>
+        <th scope="col">닉네임</th>
+        <th scope="col">작성일</th>
+        <th scope="col">조회수</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="posts : ${postsList}">
+        <td>
+            <span th:text="${posts.id}"></span>
+        </td>
+        <td>
+            <a th:href="@{'/posts/' + ${posts.id}}">
+                <span th:text="${posts.title}"></span>
+            </a>
+        </td>
+        <td>
+            <span th:text="${posts.writer}"></span>
+        </td>
+        <td>
+            <span th:text="${#temporals.format(posts.createdDate, 'yyyy-MM-dd HH:mm')}"></span>
+        </td>
+        <td>
+            <span th:number="${posts.view}"></span>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<div>
+    <span th:each="pageNum : ${pageList}" th:inline="text">
+        <a th:href="@{'/?page=' + ${pageNum}}">[[${pageNum}]]</a>
+    </span>
+</div>
+<a class="btn-write-link" th:href="@{/post}"><button type="button" class="btn btn-write">글쓰기</button></a>
+
+<!-- 검색 form -->
+<form class="d-flex" role="search" action="/posts/search" method="GET">
+    <input class="form-control me-2" name="keyword" type="text" placeholder="Search">
+    <button class="btn btn-outline-success" type="submit">Search</button>
+</form>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+        crossorigin="anonymous"></script>
+</body>
+</html>

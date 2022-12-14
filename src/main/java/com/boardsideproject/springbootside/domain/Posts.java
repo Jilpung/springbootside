@@ -28,9 +28,9 @@ public class Posts extends BaseTimeEntity{
     @Column(nullable = false)
     private String writer;
 
-//    @Column(columnDefinition = "integer default 0", nullable = false)
-//    private int view;
-//
+    @Column(columnDefinition = "integer default 0", nullable = false)
+    private int view;
+
 //    @ManyToMany(fetch = FetchType.LAZY)
 //    @JoinColumn(name = "user_id")
 //    private User user;
