@@ -57,6 +57,7 @@
                             alert('로그인 성공')
                             localStorage.setItem('id', id);
                             location.href = "http://localhost:8877"
+                            // document.cookie = `id=${id}`
                         } else {
                             alert(response);
                         }
