@@ -22,7 +22,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="p : ${posts}"  th:id="${p.id}" th:onclick="'location.href=\''+ @{/{id}(id=${p.id})} + '\''">
+        <tr th:each="p : ${posts}"  th:id="${p.id}" th:onclick="|location.href='+ @{/{id}(id=${p.id})}'|">
             <td scope="row" width="10%">
                 <div th:text="${p.id}"></div>
             </td>
@@ -45,7 +45,7 @@
         </tbody>
     </table>
 </th:block>
-<script>
+<script th:src="@{js/jquery-3.6.0.min.js}">
     function view(id) {
         const path = 'http://localhost:8877/api/' + id;
     }

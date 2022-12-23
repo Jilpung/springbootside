@@ -35,7 +35,7 @@
 </th:block>
 
 <th:block layout:fragment="script">
-    <script type="text/javascript">
+    <script type="text/javascript" th:src="@{js/jquery-3.6.0.min.js}">
         $(function () {
             $('.btn-submit').click((e) => {
                 const id = $('#id').val();
@@ -43,24 +43,24 @@
                 const confirmPassword = $('#confirmPassword').val()
                 const name = $('#name').val();
 
-                if (id == '') {
+                if (id == '' || null) {
                     alert('아이디를 입력해주세요');
                     e.preventDefault();
                 }
-                if (password == '') {
+                if (password == '' || null) {
                     alert('패스워드를 입력해주세요');
                     e.preventDefault();
                 }
-                if (confirmPassword == '') {
+                if (confirmPassword == '' || null) {
                     alert('패스워드 확인을 입력해주세요');
                     e.preventDefault();
                 }
-                if (name == '') {
+                if (name == '' || null) {
                     alert('이름을 입력해주세요');
                     e.preventDefault();
                 }
 
-                if (password != confirmPassword) {
+                if (password != confirmPassword || null) {
                     alert('비밀번호가 일치하지 않습니다.')
                     e.preventDefault();
                 } else {
